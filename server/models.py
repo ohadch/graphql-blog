@@ -1,10 +1,10 @@
 from server import db
 
 
-class Member(db.Model):
+class User(db.Model):
 
-    __tablename__ = 'member'
-
+    __tablename__ = 'user'
+    
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(120), nullable=False)
     last_name = db.Column(db.String(120), nullable=False)
@@ -21,8 +21,8 @@ class Post(db.Model):
     header = db.Column(db.String(120), nullable=False)
     content = db.Column(db.Text, nullable=False)
 
-    member_id = db.Column(db.Integer, db.ForeignKey("member.id"))
-    member = db.relationship("Member")
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship("User")
 
     def __repr__(self):
         return f"<Post({self.header}>"
@@ -34,8 +34,8 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
 
-    member_id = db.Column(db.Integer, db.ForeignKey("member.id"))
-    member = db.relationship("Member")
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship("User")
 
     post_id = db.Column(db.Integer, db.ForeignKey("post.id"))
     post = db.relationship("Post")
