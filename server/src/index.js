@@ -37,4 +37,9 @@ sequelize
     })
     .catch(err => {
         console.error('Unable to connect to the database:', err);
+    })
+    .then(() => {
+        server.listen().then(({ url }) => {
+            console.log(`🚀  Server ready at ${url}`);
+        });
     });

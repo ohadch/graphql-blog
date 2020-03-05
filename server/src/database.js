@@ -44,8 +44,8 @@ const comments = sequelize.define('comment', {
 });
 
 // Associations
-User.hasMany(Post);
-Post.hasMany(Comment);
+users.hasMany(posts);
+posts.hasMany(comments);
 
 function databaseFactory() {
     const Op = Sequelize.Op;
