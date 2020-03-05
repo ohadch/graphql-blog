@@ -2,8 +2,9 @@
 This project is intended to help me learn how to use graphql alongside with some sub goals.
 
 # Tech Stack
-- Backend: Python/Flask
-- Frontend: svelte
+- Backend: Node.js
+- Frontend: Vue
 - Frontend - Backend: GraphQL
 - DB: SQLite
+- ORM: Sequelize
 - CI/CD: TravisCI
