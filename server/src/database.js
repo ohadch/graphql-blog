@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 const sequelize = databaseFactory();
 
-const User = sequelize.define('user', {
+const users = sequelize.define('user', {
     // attributes
     firstName: {
         type: Sequelize.STRING,
@@ -22,7 +22,7 @@ const User = sequelize.define('user', {
 });
 
 
-const Post = sequelize.define('post', {
+const posts = sequelize.define('post', {
     // attributes
     title: {
         type: Sequelize.STRING,
@@ -35,7 +35,7 @@ const Post = sequelize.define('post', {
 });
 
 
-const Comment = sequelize.define('comment', {
+const comments = sequelize.define('comment', {
     // attributes
     body: {
         type: Sequelize.STRING,
@@ -66,4 +66,6 @@ sequelize.sync({ force: true })
         console.log(`Database & tables created!`)
     });
 
-module.exports = { sequelize };
+module.exports = { sequelize, store: {
+    users, posts, comments
+    } };

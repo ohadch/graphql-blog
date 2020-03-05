@@ -2,10 +2,12 @@ const { ApolloServer } = require("apollo-server");
 
 const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
-const { sequelize } = require("./database");
+const { sequelize, store } = require("./database");
 
 const UserAPI = require("./datasources/user");
 const PostAPI = require("./datasources/post");
+const CommentAPI = require("./datasources/comment");
+
 
 const server = new ApolloServer({
     context: async ({ req }) => {
@@ -21,8 +23,9 @@ const server = new ApolloServer({
     typeDefs,
     resolvers,
     dataSources: () => ({
-        userAPI: new UserAPI(),
-        postAPI: new PostAPI()
+        userAPI: new UserAPI({ store }),
+        postAPI: new PostAPI({ store }),
+        commentAPI: new CommentAPI({ store }),
     })
 });
 
