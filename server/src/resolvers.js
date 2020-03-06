@@ -12,7 +12,9 @@ const resolvers = {
         register: (_, { email, firstName, lastName }, { dataSources }) => {
             if (!isEmail.validate(email)) throw new Error("Email is invalid");
             return dataSources.userAPI.register({ email, firstName, lastName })
-        }
+        },
+        createPost: (_, { title, body }, { dataSources }) => dataSources.postAPI.createPost({ title, body }),
+        createComment: (_, { body, postId }, { dataSources }) => dataSources.commentAPI.createComment({ body, postId }),
     }
 };
 

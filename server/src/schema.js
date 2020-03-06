@@ -46,6 +46,8 @@ const typeDefs = gql`
     
     type Mutation {
         register(firstName: String!, lastName: String!, email: String!): User!
+        createPost(title: String!, body: String!): Post!
+        createComment(body: String!, postId: Int!, authorId: Int!): Comment!
     }
 `;
 
