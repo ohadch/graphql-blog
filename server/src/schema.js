@@ -37,6 +37,10 @@ const typeDefs = gql`
         comments(postId: ID!): [Comment]!
         me: User
     }
+    
+    type Mutation {
+        register(firstName: String!, lastName: String!, email: String!): User!
+    }
 `;
 
 module.exports = typeDefs;

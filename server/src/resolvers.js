@@ -1,8 +1,16 @@
+const isEmail = require("isemail");
+
 const resolvers = {
     Query: {
         posts: async (_, __, { dataSources }) => dataSources.postAPI.getAllPosts(),
         comments: async (_, { postId }, { dataSources }) => dataSources.commentAPI.getCommentsByPostId({ postId }),
         me: (_, __, { dataSources }) => dataSources.userAPI.findOrCreateUser()
+    },
+    Mutation: {
+        register: (_, { email, firstName, lastName }, { dataSources }) => {
+            if (!isEmail.validate(email)) throw new Error("Email is invalid");
+            return dataSources.userAPI.register({ email, firstName, lastName })
+        }
     }
 };
 

@@ -1,4 +1,5 @@
 const { ApolloServer } = require("apollo-server");
+const isEmail = require("isemail");
 
 const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
@@ -16,7 +17,7 @@ const server = new ApolloServer({
         const email = Buffer.from(auth, 'base64').toString('ascii');
         if (!isEmail.validate(email)) return {user: null};
         // Find user by email
-        const users = await store.users.findOrCreate({ where: { email } })
+        const users = await store.users.findOrCreate({ where: { email } });
         const user = users && users[0] || null;
         return { user: { ...user.dataValues } }
     },
