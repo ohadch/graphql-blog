@@ -1,5 +1,4 @@
 const { DataSource } = require('apollo-datasource');
-const isEmail = require('isemail');
 
 class UserAPI extends DataSource {
   constructor({ store }) {
@@ -34,6 +33,10 @@ class UserAPI extends DataSource {
     await newUser.save();
 
     return newUser;
+  }
+
+  async getAllUsers() {
+    return this.store.users.findAll();
   }
 
 }
