@@ -3,6 +3,9 @@
       <router-link to="editor">
           <button>Create Post</button>
       </router-link>
+      <router-link to="login">
+          <button>Logout</button>
+      </router-link>
     <ul>
         <Post v-for="post in posts" :post="post" :key="post.id" />
     </ul>

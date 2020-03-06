@@ -6,8 +6,7 @@ import LoginPage from '../login/LoginPage'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     name: 'Feed',
     component: FeedPage
@@ -28,8 +27,11 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   next({path: "/login"})
-// })
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem("token")
+  return token ? next() : next({
+    path: "/login"
+  })
+})
 
 export default router
