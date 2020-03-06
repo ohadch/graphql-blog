@@ -12,13 +12,17 @@ const CommentAPI = require("./datasources/comment");
 
 const server = new ApolloServer({
     context: async ({ req }) => {
+
         // Auth check on request
         const auth = req.headers && req.headers.authorization || '';
         const email = Buffer.from(auth, 'base64').toString('ascii');
         if (!isEmail.validate(email)) return {user: null};
+
         // Find user by email
-        const users = await store.users.findOrCreate({ where: { email } });
-        const user = users && users[0] || null;
+        const user = await store.users.findOne( { where: { email } } );
+
+        if (!user) return {user: null};
+
         return { user: { ...user.dataValues } }
     },
     typeDefs,

@@ -31,12 +31,17 @@ const typeDefs = gql`
         updatedAt: String
     }
     
+    type SignInResponse {
+        success: Boolean
+        token: String
+    }
     
     type Query {
         posts: [Post]!
         comments(postId: ID!): [Comment]!
         users: [User]!
-        me: User
+        authenticate(email: String!): SignInResponse!
+        me: User!
     }
     
     type Mutation {

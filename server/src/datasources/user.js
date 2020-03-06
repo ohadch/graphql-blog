@@ -35,6 +35,24 @@ class UserAPI extends DataSource {
     return newUser;
   }
 
+  async authenticate({ email }) {
+    const exists = await this.store.users.findOne({ where: { email } });
+
+    // Return the user if exists
+    if (!exists)
+      return {success: false};
+
+    return {
+      token: Buffer.from(email, 'ascii').toString('base64'),
+      success: true
+    };
+  }
+
+  async getUser({ email: emailArg } = {}) {
+    const email = emailArg || this.context.user.email;
+    return this.store.users.findOne({ where: { email } })
+  }
+
   async getAllUsers() {
     return this.store.users.findAll();
   }

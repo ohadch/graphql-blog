@@ -5,7 +5,8 @@ const resolvers = {
         posts: async (_, __, { dataSources }) => dataSources.postAPI.getAllPosts(),
         comments: async (_, { postId }, { dataSources }) => dataSources.commentAPI.getCommentsByPostId({ postId }),
         users: async (_, __, { dataSources }) => dataSources.userAPI.getAllUsers(),
-        me: (_, __, { dataSources }) => dataSources.userAPI.findOrCreateUser()
+        authenticate: (_, { email }, { dataSources }) => dataSources.userAPI.authenticate({ email }),
+        me: (_, __, { dataSources }) => dataSources.userAPI.getUser()
     },
     Mutation: {
         register: (_, { email, firstName, lastName }, { dataSources }) => {
