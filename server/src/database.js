@@ -48,16 +48,9 @@ users.hasMany(posts);
 posts.hasMany(comments);
 
 function databaseFactory() {
-    const Op = Sequelize.Op;
-    const operatorsAliases = {
-        $in: Op.in,
-    };
-
-    return new Sequelize('database', 'username', 'password', {
-        dialect: 'sqlite',
-        storage: './store.sqlite',
-        operatorsAliases,
-        logging: false,
+    return new Sequelize('graphql_blog', 'postgres', 'admin', {
+        host: 'localhost',
+        dialect: 'postgres',
     });
 }
 
